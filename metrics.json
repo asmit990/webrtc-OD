@@ -1,0 +1,31 @@
+{
+  "session_id": "demo_session_2025",
+  "benchmark_duration_s": 30,
+  "detection_mode": "wasm",
+  "frame_count": 450,
+  "processed_frames": 425,
+  "processed_fps": 14.2,
+  "median_e2e_latency_ms": 85,
+  "p95_e2e_latency_ms": 150,
+  "uplink_kbps": 1200,
+  "downlink_kbps": 300,
+  "timestamp": "2025-01-20T22:43:22Z",
+  "system_info": {
+    "os": "Linux",
+    "arch": "x86_64",
+    "cpu_cores": 4,
+    "memory_gb": 8
+  },
+  "test_conditions": {
+    "input_resolution": "320x240",
+    "target_fps": 15,
+    "model": "YOLOv5n",
+    "confidence_threshold": 0.25
+  },
+  "performance_summary": {
+    "avg_processing_time_ms": 45,
+    "peak_memory_usage_mb": 156,
+    "network_stability": "good",
+    "detection_accuracy": "high"
+  }
+}

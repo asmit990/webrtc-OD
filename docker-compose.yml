@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  webrtc-detection:
+    build: .
+    ports:
+      - "3000:3000"
+      - "8001:8001"
+    environment:
+      - NODE_ENV=production
+      - MODE=${MODE:-wasm}
+      - NGROK_ENABLED=${NGROK_ENABLED:-false}
+    volumes:
+      - ./models:/app/models
+      - ./logs:/app/logs
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=webrtc_detection
+
+  # Optional ngrok service for public access
+  ngrok:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    ports:
+      - "4040:4040"
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    profiles:
+      - ngrok
+
+volumes:
+  mongodb_data:
